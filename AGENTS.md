@@ -1,0 +1,24 @@
+# Sallty project conventions
+
+- Communicate with the owner in simple Egyptian Arabic, as requested for Phase 6. Keep technology names, code, and filenames in English. Explain new terms with Sallty examples. Product UI supports formal Arabic/RTL and English/LTR.
+- End each task with: what changed, why, important files, how to try/verify it, and next step.
+- Work one approved major phase at a time. Phase 6 Cart, guest COD Checkout, order management and flat local shipping settings were approved on 11 October 2026. Do not begin Phase 7 without the owner's explicit approval. No payment gateways, shipping integrations, subscriptions or commissions.
+- Read docs/architecture.md and docs/roadmap.md before implementation; document material decisions in simple formal Arabic.
+- On 14 October 2026 the owner approved a visual self-service store builder, promotional sections, section ordering/hiding, private design drafts and owner-only actual-store previews. Drafts and hidden section content must not leak through public DTOs. Every nested media reference remains owner-scoped; publishing validates visible sections. See docs/visual-store-builder.md.
+- On 13 October 2026 the owner explicitly approved physical/digital products, address-free digital checkout, automatic delivery only after owner-confirmed full payment, ten configurable local storefront themes, public merchant contact settings, and YouTube/custom/local video. PayPal and bank integration are explicitly deferred. Private delivery URLs must never appear in public catalog DTOs; release is order-snapshot based and requires a valid receipt capability and confirmed payment. See docs/digital-products-and-design.md.
+- The owner approved password recovery, regional support, bilingual UI, light/dark themes, dashboard navigation and a minimal platform-admin foundation. Navigation placeholders do not authorize Orders, Payments, Shipping or Subscriptions implementations.
+- Required stack: Next.js App Router, React, strict TypeScript, Tailwind CSS v4, shadcn/ui, NestJS REST, MongoDB, Mongoose, pnpm workspaces.
+- SQL databases and their ORMs are prohibited. Verify engines and peer dependencies before pinning exact package versions.
+- Prefer local development, free tiers, and necessary open-source tools. Never activate paid services. Discuss any credit-card requirement first; obtain approval before potentially paid infrastructure.
+- Never promise permanent free hosting. Explain quotas and commercial-use restrictions before recommending external services. Do not provision accounts or infrastructure in a documentation phase.
+- Domain sallty.com is already purchased from GoDaddy. Do not change DNS or production credentials without explicit approval.
+- Backend services and repositories enforce ownership; derive authorized storeId from the session and store owner. Never trust browser storeId or expose Mongoose access to Next.js.
+- Scope all tenant reads/writes, associations, aggregations, uploads, and exports. MongoDB references do not enforce tenant integrity automatically.
+- Validate requests with Zod and schemas with Mongoose; allowlist update fields and query parameters. Reject user-supplied MongoDB operators and raw filters.
+- Use database-enforced unique indexes, not application checks alone. Mongoose unique is an index declaration, not a validator.
+- Use MongoDB transactions on a replica set for stock/orders/idempotency and related audit records. Pass the same session to every operation; no parallel operations or external side effects inside transaction callbacks.
+- Store prices as bounded safe integer minor units in the immutable store currency; existing EGP amounts remain unchanged. Support country-specific phone validation for the 22 Arab countries. Preserve immutable order price/address snapshots when orders are approved. Commission implementation is deferred until approved.
+- Prefer Server Components; use Client Components for actual interaction. Use Arabic lang, RTL, logical CSS, accessible forms, mobile layouts, real loading/error/empty states.
+- No hardcoded secrets or fabricated production sales. Keep placeholders in .env.example; redact customer data and auth secrets in logs.
+- Run meaningful auth, cross-tenant, transaction/concurrency and critical journey tests against a real MongoDB replica set. Report unrun checks honestly.
+- Preserve existing work. Add only needed dependencies and files. No payment, shipping, WhatsApp messaging API, or custom-domain integrations without approval.

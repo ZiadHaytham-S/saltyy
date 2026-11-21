@@ -1,0 +1,34 @@
+{
+  "name": "sallty",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@12.10.1",
+  "engines": {
+    "node": ">=24.15.0 <25"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @sallty/contracts build && pnpm --parallel --filter @sallty/contracts --filter @sallty/web --filter @sallty/api dev",
+    "dev:web": "pnpm --filter @sallty/contracts build && pnpm --filter @sallty/web dev",
+    "dev:api": "pnpm --filter @sallty/contracts build && pnpm --filter @sallty/api dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm --filter @sallty/contracts build && pnpm -r typecheck",
+    "lint": "pnpm -r lint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "db:start": "pnpm --filter @sallty/api db:start",
+    "db:init": "pnpm --filter @sallty/api db:init",
+    "db:check": "pnpm --filter @sallty/api db:check",
+    "test": "pnpm --filter @sallty/api test",
+    "test:smoke": "node scripts/smoke.mjs",
+    "test:integration": "pnpm --filter @sallty/contracts build && pnpm --filter @sallty/api build && pnpm --filter @sallty/api test:integration",
+    "test:web": "pnpm --filter @sallty/contracts build && pnpm --filter @sallty/api build && node scripts/auth-web-test.mjs",
+    "setup:env": "node scripts/setup-env.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "24.19.2",
+    "eslint": "9.39.5",
+    "prettier": "3.9.10",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.1"
+  }
+}

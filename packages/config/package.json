@@ -1,0 +1,13 @@
+{
+  "name": "@sallty/config",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    "./tsconfig.base.json": "./tsconfig.base.json",
+    "./eslint": "./eslint.mjs"
+  },
+  "devDependencies": {
+    "typescript-eslint": "8.71.1"
+  }
+}

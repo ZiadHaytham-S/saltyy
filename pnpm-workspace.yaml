@@ -1,0 +1,17 @@
+packages:
+  - apps/*
+  - packages/*
+
+strictPeerDependencies: true
+storeDir: .cache/pnpm-store
+allowBuilds:
+  argon2: true
+  esbuild: true
+  sharp: true
+  '@nestjs/core': false
+  unrs-resolver: false
+minimumReleaseAgeExclude:
+  - '@types/node@24.19.2'
+  - lucide-react@1.55.0
+  - prettier@3.9.10
+  - nodemailer@10.1.0
